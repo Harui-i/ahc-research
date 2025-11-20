@@ -4,7 +4,7 @@
     "dockerfile": "Dockerfile",
     "context": "..",
     "args": {
-      "INSTALL_TOML": "src/cpython/082-3-13_cpython.toml",
+      "INSTALL_TOML": "082-3-13_cpython.toml",
       "USERNAME": "vscode"
     }
   },

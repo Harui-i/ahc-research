@@ -3,7 +3,7 @@ FROM ubuntu:24.04
 
 SHELL ["/bin/bash", "-c"]
 
-ARG INSTALL_TOML=src/cpython/082-3-13_cpython.toml
+ARG INSTALL_TOML=082-3-13_cpython.toml
 ARG USERNAME=vscode
 
 WORKDIR /tmp
