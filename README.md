@@ -17,3 +17,20 @@
 となり N <= 196608となります。
 
 4層のNNを考えると、1つの行列のサイズは sqrt(199608/4) = 221となるため、　200くらいが妥当と考えました。
+
+## ALU2024 Docker image builds
+
+`src/ALU2024_Dockerfile` は、 AtCoder の言語アップデート用 TOML に含まれる `install` スクリプトをそのまま実行するための Dockerfile です。
+以下のように指定することで、 `src/cpython/082-3-13_cpython.toml` から CPython 3.13.7 イメージを構築できます。
+
+```
+docker build -f src/ALU2024_Dockerfile \
+  --build-arg INSTALL_TOML=src/cpython/082-3-13_cpython.toml \
+  -t ac-cpython:3.13 .
+```
+
+`install` ブロックに含まれる `sudo` は Docker ビルド中に root で実行できるよう自動的に無効化されます。apt や pip を使うため、ビルドにはインターネット接続が必要です。
+
+### TOML `install` スクリプトとの対応関係
+
+`src/ALU2024_Dockerfile` は `ARG INSTALL_TOML` で指定した TOML を `/tmp/install.toml` としてコピーします。`RUN ... python3` のステップでは tomllib で `install` キーを読み出し、`sudo ` を文字列置換で外した上で `/tmp/install.sh` に保存します。その後の `RUN bash /tmp/install.sh` が AtCoder 側が公開しているインストール手順を丸ごと実行する部分に相当します。よって、TOML 内の `install` ブロックで記載されたコマンド列が、`sudo` 除去以外の改変なしで Docker レイヤー上に適用される構造になっています。
