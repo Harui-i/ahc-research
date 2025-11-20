@@ -6,9 +6,13 @@
     "args": {
       "INSTALL_TOML": "082-3-13_cpython.toml",
       "USERNAME": "vscode"
+    },
+    "options": {
+      "tags": [
+        "ahc-cpython-dev:3.13"
+      ]
     }
   },
-  "image": "ahc-cpython-dev:3.13",
   "remoteUser": "vscode",
   "customizations": {
     "vscode": {
