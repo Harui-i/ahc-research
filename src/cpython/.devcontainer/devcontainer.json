@@ -2,7 +2,7 @@
   "name": "CPython 3.13 Dev Container",
   "build": {
     "dockerfile": "Dockerfile",
-    "context": ".",
+    "context": "../",
     "args": {
       "INSTALL_TOML": "082-3-13_cpython.toml",
       "USERNAME": "vscode"

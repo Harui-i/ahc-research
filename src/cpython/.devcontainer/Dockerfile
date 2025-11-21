@@ -32,10 +32,10 @@ COPY ${INSTALL_TOML} /tmp/install.toml
 RUN set -euo pipefail; \
     python3 - <<'PY' >/tmp/install.sh
 import tomllib
-from pathlib import Path
-install = tomllib.loads(Path("/tmp/install.toml").read_text())
+import pathlib
+install = tomllib.loads(pathlib.Path("/tmp/install.toml").read_text())
 script = install["install"].replace("sudo ", "")
-Path("/tmp/install.sh").write_text(script)
+pathlib.Path("/tmp/install.sh").write_text(script)
 PY
 
 # Run the AtCoder-provided install script and remove build leftovers.
